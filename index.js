@@ -4,7 +4,7 @@ const app = express();
 // Route Handler
 
 app.get('/', (req,res)=>{
-  res.send({hi:'there'});
+  res.send({hi:'there', message : "Fuck you bitch"});
 
 });
 
