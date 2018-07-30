@@ -9,7 +9,21 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.googleClientSecret,
     callbackURL: '/auth/google/callback'
 }, (accessToken, refreshToken, profile, done) => {
-    new User({
-        googleId: profile.id
-    }).save();
+
+    // search db for existing user
+    User.findOne({
+            googleId: profile.id
+        })
+        .then((existingUser) => {
+            if (existingUser) {
+                // we have a user already
+            } else {
+                //  create a new user
+                new User({
+                    googleId: profile.id
+                }).save();
+            }
+        })
+
+
 }));
