@@ -7,14 +7,16 @@ const User = mongoose.model('users');
 // SerializeUser
 passport.serializeUser((user, done) => {
     done(null, user.id); // this is the user id which is from the mongodb.       
-})
+});
+
 // DeserilizeUser 
 passport.deserializeUser((id, done) => {
     User.findById(id)
         .then(user => {
             done(null, user);
-        })
-})
+        });
+});
+
 passport.use(new GoogleStrategy({
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
