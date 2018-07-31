@@ -4,6 +4,17 @@ const mongoose = require('mongoose');
 const keys = require('../config/keys');
 const User = mongoose.model('users');
 
+// SerializeUser
+passport.serializeUser((user, done) => {
+    done(null, user.id); // this is the user id which is from the mongodb.       
+})
+// DeserilizeUser 
+passport.deserializeUser((id, done) => {
+    User.findById(id)
+        .then(user => {
+            done(null, user);
+        })
+})
 passport.use(new GoogleStrategy({
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
@@ -20,10 +31,10 @@ passport.use(new GoogleStrategy({
             } else {
                 //  create a new user
                 new User({
-                    googleId: profile.id
-                }).save();
+                        googleId: profile.id
+                    }) //creates a mongoose model instace/ new record
+                    .save() // save the instances
+                    .then(user => done(null, user));
             }
         })
-
-
 }));
