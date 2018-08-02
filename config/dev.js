@@ -5,4 +5,4 @@ module.exports = {
     googleClientSecret : 'whOGSlEfw2mgRVqWbp1dQSIR',
     mongoURI : 'mongodb://roshith:roshith432@ds259241.mlab.com:59241/email-dev',
     cookieKey : 'ioweirwncskdfhaufhsjkdnflasdfgblesirfhserergvsdjf'
-}
+} 
