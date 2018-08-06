@@ -3,12 +3,13 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
+const dotenv = require('dotenv').config()
 require('./models/User');
 require('./services/passport');
 const authRoutes = require('./routes/authRoutes');
 
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 const app = express();
 
 // creating Cookie
